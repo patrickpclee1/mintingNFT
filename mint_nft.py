@@ -691,19 +691,3 @@ signed_tx = w3.eth.account.sign_transaction(tx, private_key=private_key)
 tx_hash = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
 tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
 print(f"Transaction receipt: {tx_receipt}")
-
-# Step 5: Complete the signChallenge function in verify.py
-def signChallenge(challenge: bytes) -> bytes:
-    message = encode_defunct(text=challenge.decode('utf-8'))
-    signed_message = w3.eth.account.sign_message(message, private_key=private_key)
-    return signed_message.signature
-
-# Step 6: Verify ownership of the NFT
-token_id = 0  # replace with your actual token ID
-owner = nft_contract.functions.ownerOf(token_id).call()
-print(f"Owner of token ID {token_id} is {owner}")
-
-# Test the signChallenge function
-challenge = b'TestChallenge'
-signature = signChallenge(challenge)
-print(f"Signed challenge: {signature}")
