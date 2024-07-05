@@ -674,8 +674,8 @@ contract_abi = [
 nft_contract = w3.eth.contract(address=contract_address, abi=contract_abi)
 
 # Step 3: Use your existing Ethereum account
-private_key = "YOUR_PRIVATE_KEY"  # Replace with your private key
-account_address = "YOUR_ACCOUNT_ADDRESS"  # Replace with your account address
+private_key = "0x586607be297552d28e0e7edcc7164ec6ebc7ea97c0fc071028eca11263e13f8a"  # Replace with your private key
+account_address = "0xbA60413B370c881f5551b0C19c65D80609dd4E0C"  # Replace with your account address
 
 # Step 4: Mint an NFT using the 'claim' function
 nonce = w3.eth.getTransactionCount(account_address)
