@@ -673,13 +673,12 @@ contract_abi = [
 
 nft_contract = w3.eth.contract(address=contract_address, abi=contract_abi)
 
-# Step 3: Generate a new account and get testnet AVAX (done via faucet)
-private_key = secrets.token_hex(32)
-account = Account.from_key(private_key)
-print(f"Generated account address: {account.address}")
+# Step 3: Use your existing Ethereum account
+private_key = "YOUR_PRIVATE_KEY"  # Replace with your private key
+account_address = "YOUR_ACCOUNT_ADDRESS"  # Replace with your account address
 
 # Step 4: Mint an NFT using the 'claim' function
-nonce = w3.eth.getTransactionCount(account.address)
+nonce = w3.eth.getTransactionCount(account_address)
 random_nonce = secrets.token_bytes(32)
 tx = nft_contract.functions.claim(random_nonce).buildTransaction({
     'chainId': 43113,
