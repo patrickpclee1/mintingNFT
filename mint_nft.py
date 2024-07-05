@@ -29,22 +29,22 @@ contract_abi = [
     "type": "constructor"
   },
   {
-    "anonymous": false,
+    "anonymous": False,
     "inputs": [
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "address",
         "name": "owner",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "address",
         "name": "approved",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "uint256",
         "name": "tokenId",
         "type": "uint256"
@@ -54,22 +54,22 @@ contract_abi = [
     "type": "event"
   },
   {
-    "anonymous": false,
+    "anonymous": False,
     "inputs": [
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "address",
         "name": "owner",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "address",
         "name": "operator",
         "type": "address"
       },
       {
-        "indexed": false,
+        "indexed": False,
         "internalType": "bool",
         "name": "approved",
         "type": "bool"
@@ -79,22 +79,22 @@ contract_abi = [
     "type": "event"
   },
   {
-    "anonymous": false,
+    "anonymous": False,
     "inputs": [
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "address",
         "name": "recipient",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "uint256",
         "name": "tokenId",
         "type": "uint256"
       },
       {
-        "indexed": false,
+        "indexed": False,
         "internalType": "bytes32",
         "name": "nonce",
         "type": "bytes32"
@@ -104,28 +104,28 @@ contract_abi = [
     "type": "event"
   },
   {
-    "anonymous": false,
+    "anonymous": False,
     "inputs": [
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "address",
         "name": "recipient",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "uint256",
         "name": "tokenIdA",
         "type": "uint256"
       },
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "uint256",
         "name": "tokenIdB",
         "type": "uint256"
       },
       {
-        "indexed": false,
+        "indexed": False,
         "internalType": "uint256",
         "name": "tokenId",
         "type": "uint256"
@@ -135,16 +135,16 @@ contract_abi = [
     "type": "event"
   },
   {
-    "anonymous": false,
+    "anonymous": False,
     "inputs": [
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "address",
         "name": "previousOwner",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "address",
         "name": "newOwner",
         "type": "address"
@@ -154,22 +154,22 @@ contract_abi = [
     "type": "event"
   },
   {
-    "anonymous": false,
+    "anonymous": False,
     "inputs": [
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "address",
         "name": "from",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "address",
         "name": "to",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": True,
         "internalType": "uint256",
         "name": "tokenId",
         "type": "uint256"
@@ -678,16 +678,16 @@ private_key = "0x586607be297552d28e0e7edcc7164ec6ebc7ea97c0fc071028eca11263e13f8
 account_address = "0xbA60413B370c881f5551b0C19c65D80609dd4E0C"  # Replace with your account address
 
 # Step 4: Mint an NFT using the 'claim' function
-nonce = w3.eth.getTransactionCount(account_address)
+nonce = w3.eth.get_transaction_count(account_address)
 random_nonce = secrets.token_bytes(32)
-tx = nft_contract.functions.claim(random_nonce).buildTransaction({
+tx = nft_contract.functions.claim(account_address, random_nonce).build_transaction({
     'chainId': 43113,
     'gas': 300000,
-    'gasPrice': w3.toWei('30', 'gwei'),
+    'gasPrice': w3.to_wei('30', 'gwei'),
     'nonce': nonce,
 })
 
 signed_tx = w3.eth.account.sign_transaction(tx, private_key=private_key)
-tx_hash = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
-tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
+tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
 print(f"Transaction receipt: {tx_receipt}")
