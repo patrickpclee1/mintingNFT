@@ -4,12 +4,12 @@ from eth_account import Account
 from eth_account.messages import encode_defunct
 import secrets
 
-# Step 1: Connect to Avalanche Fuji Testnet
+#Connect to AVX
 FUJI_RPC_URL = "https://api.avax-test.network/ext/bc/C/rpc"
 w3 = Web3(Web3.HTTPProvider(FUJI_RPC_URL))
 w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
-# Step 2: Define the NFT contract ABI and address
+#Define the NFT contract ABI and address
 contract_address = "0x85ac2e065d4526FBeE6a2253389669a12318A412"
 contract_abi = [
   {
@@ -673,11 +673,11 @@ contract_abi = [
 
 nft_contract = w3.eth.contract(address=contract_address, abi=contract_abi)
 
-# Step 3: Use your existing Ethereum account
+# Use your existing Ethereum account
 private_key = "0x586607be297552d28e0e7edcc7164ec6ebc7ea97c0fc071028eca11263e13f8a"  # Replace with your private key
 account_address = "0xbA60413B370c881f5551b0C19c65D80609dd4E0C"  # Replace with your account address
 
-# Step 4: Mint an NFT using the 'claim' function
+#Mint an NFT using the 'claim' function
 nonce = w3.eth.get_transaction_count(account_address)
 random_nonce = secrets.token_bytes(32)
 tx = nft_contract.functions.claim(account_address, random_nonce).build_transaction({
